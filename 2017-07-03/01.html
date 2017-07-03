@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			矩形绘制
+				fillRect(x, y, width, height)
+				绘制一个填充的矩形
+				strokeRect(x, y, width, height)
+				绘制一个矩形的边框
+				clearRect(x, y, width, height)
+				清除指定矩形区域，让清除部分完全透明			
+					
+			圆形，扇形		
+				arc(x, y, radius, startAngle, endAngle, anticlockwise)
+				画一个以（x,y）为圆心的以radius为半径的圆弧（圆），从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
+		
+				arc()函数中的角度单位是弧度，不是度数。角度与弧度的js表达式:radians=(Math.PI/180)*degrees。	
+			
+			路径绘制
+				beginPath()
+				新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。
+				closePath()
+				闭合路径之后图形绘制命令又重新指向到上下文中。
+				stroke()
+				通过线条来绘制图形轮廓。
+				fill()
+				通过填充路径的内容区域生成实心的图形。		
+			
+			移动笔触moveTo(x, y)
+				将笔触移动到指定的坐标x以及y上。
+				当canvas初始化或者beginPath()调用后，你通常会使用moveTo()函数设置起点。我们也能够使用moveTo()绘制一些不连续的路径。看一下下面的笑脸例子。我将用到moveTo()方法（红线处）的地方标记了。
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				
+				//矩形的绘制
+		        
+		        ctx.fillStyle = "red"; //填充颜色
+
+				ctx.fillRect (10, 10, 100, 100); //左上角位置x,y 以及宽高
+				
+				ctx.clearRect(15,15,15,15); //清除矩形区域内的内容,让清除部分完全透明
+				
+				ctx.strokeRect(30,30,15,15); //画出矩形的边框
+				
+				
+				//圆形的绘制
+				
+				ctx.fillStyle = 'blue';
+				
+				ctx.arc(160,75,50,0,Math.PI*2,true);
+				
+				ctx.fill();
+				
+				
+				//绘制路径
+				
+				ctx.beginPath();
+				
+				ctx.fillStyle = 'yellow';
+				
+				ctx.moveTo(100,200);
+				
+				ctx.lineTo(100,175);
+				
+				ctx.lineTo(150,200);
+				
+				ctx.fill();
+				
+				ctx.closePath();
+		
+			}
+			
+			
+		</script>
+	</body>
+</html>
