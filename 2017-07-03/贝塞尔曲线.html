@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			贝塞尔曲线
+			
+			
+			quadraticCurveTo(cp1x, cp1y, x, y)
+			绘制二次贝塞尔曲线，cp1x,cp1y为一个控制点，x,y为结束点。
+
+			bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+			绘制三次贝塞尔曲线，cp1x,cp1y为控制点一，cp2x,cp2y为控制点二，x,y为结束点。
+
+
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		<img src="img/canvas_curves.png" alt="">
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				
+			    ctx.beginPath();
+			    //气泡框
+			    ctx.moveTo(75,25);
+			    ctx.quadraticCurveTo(25,25,25,62.5);
+			    ctx.quadraticCurveTo(25,100,50,100);
+			    ctx.quadraticCurveTo(50,120,30,125);
+			    ctx.quadraticCurveTo(60,120,65,100);
+			    ctx.quadraticCurveTo(125,100,125,62.5);
+			    ctx.quadraticCurveTo(125,25,75,25);
+			    
+			    ctx.stroke();
+			    ctx.closePath();
+			    
+				//心形
+			    ctx.beginPath();
+			    ctx.fillStyle = 'red';
+			    ctx.moveTo(175,140);
+			    ctx.bezierCurveTo(175,137,170,125,150,125);
+			    ctx.bezierCurveTo(110,125,120,162.5,120,162.5);
+			    ctx.bezierCurveTo(125,180,140,202,175,220);
+			    ctx.bezierCurveTo(205,202,230,185,230,162.5);
+			    ctx.bezierCurveTo(232,162.5,230,125,200,125);
+			    ctx.bezierCurveTo(185,125,175,137,175,140);
+			    ctx.fill();
+				ctx.closePath();
+			}
+			
+			
+		</script>
+	</body>
+</html>
