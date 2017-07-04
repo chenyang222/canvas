@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			createPattern 的例子
+
+				在最后的例子中，我创建一个图案然后赋给了 fillStyle 属性。唯一要注意的是，使用 Image 对象的 onload handler 来确保设置图案之前图像已经装载完毕。
+	
+			Canvas 填充规则
+				当我们用到 fill（或者 clip和isPointinPath ）你可以选择一个填充规则，该填充规则根据某处在路径的外面或者里面来决定该处是否被填充，这对于自己与自己路径相交或者路径被嵌套的时候是有用的。
+				
+				两个可能的值：
+				
+				 "nonzero": non-zero winding rule, 默认值.
+				 "evenodd":  even-odd winding rule.
+				这个例子，我们用填充规则 evenodd
+
+
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				  // 创建新 image 对象，用作图案
+				  var img = new Image();
+				  img.src = 'img/wallpaper.png';
+				  img.onload = function(){
+				
+				    // 创建图案
+				    var ptrn = ctx.createPattern(img,'repeat');
+				    ctx.fillStyle = ptrn;
+				    ctx.fillRect(0,0,150,150);
+				
+				  }			
+			  
+				  ctx.beginPath(); 
+				  ctx.arc(250, 250, 30, 0, Math.PI*2, true);
+				  ctx.arc(250, 250, 15, 0, Math.PI*2, true);
+				  ctx.fill("evenodd");
+
+
+			}
+			
+			
+		</script>
+	</body>
+</html>

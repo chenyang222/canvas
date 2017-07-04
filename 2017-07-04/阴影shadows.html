@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			阴影 Shadows
+				shadowOffsetX = float
+				shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。
+				
+				shadowOffsetY = float
+				shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。
+				shadowBlur = float
+				shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。
+				shadowColor = color
+				shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				
+			  ctx.shadowOffsetX = 2;
+			  ctx.shadowOffsetY = 2;
+			  ctx.shadowBlur = 2;
+			  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+			 
+			  ctx.font = "20px Times New Roman";
+			  ctx.fillStyle = "Black";
+			  ctx.font = "48px 微软雅黑";
+			  ctx.fillText("Single Ranchy", 50, 50);
+
+			}
+			
+			
+		</script>
+	</body>
+</html>

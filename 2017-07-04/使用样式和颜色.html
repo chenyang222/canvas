@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			色彩 Colors
+			
+			fillStyle = color
+				设置图形的填充颜色。
+			strokeStyle = color
+				设置图形轮廓的颜色。
+				
+			注意: 一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。
+
+			透明度globalAlpha = transparencyValue
+				这个属性影响到 canvas 里所有图形的透明度，有效的值范围是 0.0 （完全透明）到 1.0（完全不透明），默认是 1.0。
+				指定透明颜色，用于描边和填充样式
+				ctx.strokeStyle = "rgba(255,0,0,0.5)";
+				ctx.fillStyle = "rgba(255,0,0,0.5)";
+
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				
+				//填充颜色
+				for(let i=0;i<6;i++){
+					
+					for(let j=0;j<6;j++){
+						
+						ctx.fillStyle = 'rgb(' + Math.floor(155-42.5*i) + "," + Math.floor(255-42.5*j) + ',150';
+						
+						ctx.fillRect(j*25,i*25,25,25);
+						
+					}
+				}
+				
+				//边框颜色
+				for(let i=0;i<6;i++){
+					
+					for(let j=0;j<6;j++){
+						
+						ctx.strokeStyle = 'rgb(' + Math.floor(155-42.5*i) + "," + Math.floor(255-42.5*j) + ',150';
+						
+						ctx.beginPath();
+						ctx.arc(175+35*i,175+35*j,15,0,Math.PI*2,true);
+						ctx.stroke();	
+						ctx.closePath();
+						
+					}
+				}
+				
+				//透明度globalAlpha
+					//四个背景图
+					ctx.fillStyle = '#FD0';
+					ctx.fillRect(0,200,75,75);
+					ctx.fillStyle = '#6c0';
+					ctx.fillRect(75,200,75,75);
+					ctx.fillStyle = '#09f';
+					ctx.fillRect(0,275,75,75);
+					ctx.fillStyle = '#f30';
+					ctx.fillRect(75,275,75,75);			
+					//设置透明度
+					ctx.globalAlpha = 0.2;
+					//设置圆的颜色
+					ctx.fillStyle = '#fff';
+					
+					for(let i=0;i<7;i++){
+						
+						ctx.beginPath();
+						//画圆
+						ctx.arc(75,275,10+10*i,0,Math.PI*2,true);
+						
+						ctx.fill();
+						
+					}
+					ctx.globalAlpha = 1;
+				//rgba()透明度	
+					  //背景
+					  ctx.fillStyle = 'red';
+					  ctx.fillRect(200,0,150,37.5);
+					  ctx.fillStyle = 'rgb(102,204,0)';
+					  ctx.fillRect(200,37.5,150,37.5);
+					  ctx.fillStyle = 'rgb(0,153,255)';
+					  ctx.fillRect(200,75,150,37.5);
+					  ctx.fillStyle = 'rgb(255,51,0)';
+					  ctx.fillRect(200,112.5,150,37.5);
+					
+					  //半透明矩形
+					  for (var i=0;i<10;i++){
+					    ctx.fillStyle = 'rgba(255,255,255,'+(i+1)/10+')';
+					    for (var j=0;j<4;j++){
+					      ctx.fillRect(205+i*14,5+j*37.5,14,27.5)
+					    }
+					  }					
+			}
+			
+			
+		</script>
+	</body>
+</html>
