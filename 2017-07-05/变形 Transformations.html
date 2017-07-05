@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			状态的保存和恢复 Saving and restoring state
+				在了解变形之前，我先介绍两个在你开始绘制复杂图形时必不可少的方法。
+				
+				save()restore()
+				save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。
+				Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：
+				
+				当前应用的变形（即移动，旋转和缩放，见下）
+				strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值
+				当前的裁切路径（clipping path），会在下一节介绍
+				你可以调用任意多次 save 方法。
+				
+				每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			
+			//获取上下文的渲染和绘画功能
+//			let ctx = myCanvas.getContext('2d');
+			//检测浏览器兼容性的方法
+			if(myCanvas.getContext){
+				
+				const ctx = myCanvas.getContext('2d');
+				
+				console.log('you can use canvas');
+				//绘画函数
+				demo(ctx);
+			}else{
+				console.log('you can\nt use canvas');
+			}
+			
+			function demo(ctx){
+				
+
+			}
+			
+			
+		</script>
+	</body>
+</html>
