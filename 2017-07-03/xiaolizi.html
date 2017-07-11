@@ -28,26 +28,22 @@
 			
 			const myCanvas = document.getElementById('myCanvas');
 			
+			let data = {x:28,y:28}
 			
-			//获取上下文的渲染和绘画功能
-//			let ctx = myCanvas.getContext('2d');
-			//检测浏览器兼容性的方法
-			if(myCanvas.getContext){
-				
+			console.log(data)
+			
+			//绘画函数
+			function draw(){
 				const ctx = myCanvas.getContext('2d');
 				
-				console.log('you can use canvas');
-				//绘画函数
-				demo(ctx);
-			}else{
-				console.log('you can\nt use canvas');
-			}
-			
-			function demo(ctx){
-			   			
-			    ctx.beginPath();
-			    ctx.arc(28,28,13,Math.PI/7,-Math.PI/7,false);
-			    ctx.lineTo(28,28);
+				ctx.clearRect(0,0,400,400)
+				
+				ctx.beginPath();
+			    
+			    ctx.arc(data.x,data.y,13,Math.PI/7,-Math.PI/7,false);
+			    
+			    ctx.lineTo(data.x,data.y);
+			    
 			    ctx.fill();
 			
 			    for(var i=0;i<20;i++){
@@ -56,6 +52,27 @@
 			    		}
 			      
 			    }
+			}   
+			// 上 38  下40  左37  右39
+			document.onkeyup = function(event){
+				
+				 if(event.keyCode == 40){
+				 	data.y += 26;
+				 }
+				 if(event.keyCode == 38){
+				 	data.y -= 26;
+				 }
+				 if(event.keyCode == 37){
+				 	data.x -= 26;
+				 }
+				 if(event.keyCode == 39){
+				 	data.x += 26;
+				 }				 
+				 init();
+			}
+			
+			function init(){
+				window.requestAnimationFrame(draw);
 			}
 			
 			
