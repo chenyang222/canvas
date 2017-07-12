@@ -19,6 +19,7 @@
 	<body>
 		<!--
 			状态的保存和恢复 Saving and restoring state
+			
 				在了解变形之前，我先介绍两个在你开始绘制复杂图形时必不可少的方法。
 				
 				save()restore()
@@ -30,8 +31,7 @@
 				当前的裁切路径（clipping path），会在下一节介绍
 				你可以调用任意多次 save 方法。
 				
-				每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。	
-	
+				每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。				
 		-->
 		
 		<canvas id="myCanvas" width="400" height="400"></canvas>
@@ -50,15 +50,29 @@
 				
 				console.log('you can use canvas');
 				//绘画函数
-				demo(ctx);
+				
+				ctx.fillRect(0,0,150,150);
+				ctx.save(); //保存默认状态
+
+				ctx.fillStyle = '#09f';
+				ctx.fillRect(15,15,120,120);
+				
+				ctx.save();
+				ctx.fillStyle = '#fff';
+				ctx.globalAlpha = 0.5;
+				ctx.fillRect(30,30,90,90);
+				
+				ctx.restore();
+				ctx.fillRect(45,45,60,60)
+				
+				ctx.restore();
+				ctx.fillRect(60,60,30,30)				
+
 			}else{
 				console.log('you can\nt use canvas');
 			}
 			
-			function demo(ctx){
-				
 
-			}
 			
 			
 		</script>

@@ -28,27 +28,9 @@
 			
 			const myCanvas = document.getElementById('myCanvas');
 			
-			
-			//获取上下文的渲染和绘画功能
-//			let ctx = myCanvas.getContext('2d');
-			//检测浏览器兼容性的方法
-			if(myCanvas.getContext){
-				
-				const ctx = myCanvas.getContext('2d');
-				
-				console.log('you can use canvas');
-				//绘画函数
-				demo(ctx);
-			}else{
-				console.log('you can\nt use canvas');
-			}
-			
-			function demo(ctx){
-				
+			const ctx = myCanvas.getContext('2d');
 
-			}
-			
-			
+
 		</script>
 	</body>
 </html>
