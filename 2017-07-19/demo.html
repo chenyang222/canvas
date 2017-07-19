@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #ffffff;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: rgba(0,0,0,1);
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			const myCanvas = document.getElementById('myCanvas');
+			
+			const ctx = myCanvas.getContext('2d');
+			
+			ctx.font = "48px serif";
+			ctx.textAlign="center";
+			ctx.textBaseline="middle";
+			ctx.fillText('Ranchy',110,20);
+			var imgData = ctx.getImageData(0, 0, 200, 200);
+			ctx.clearRect(0,0,200,200);
+			var point = [];
+			 var num = 0;
+			 
+			 for(var i=0;i<imgData.height;i++){
+			 	 for(var j=0;j<imgData.width;j++){
+					var x = i*4*imgData.width + 4*j;
+			        r = imgData.data[x],
+			        g = imgData.data[x+1],
+			        b = imgData.data[x+2];
+			        a = imgData.data[x+3]; 
+			        var point2 = [];
+					point2.push(r,g,b,a);			   
+//					console.log(point2)
+					point.push(point2);	
+			 	 }
+			 }
+			 
+			 var m = 0;
+//			 
+			 setInterval(function(){
+				
+				draw(m);
+			 	m++;
+			 	
+			 },5)
+
+			 function draw(x){
+		 		ctx.beginPath();
+				var rgba = 'rgba('+point[x][0]+','+point[x][1]+','+point[x][2]+','+point[x][3]+')';
+				ctx.fillStyle = rgba;
+				ctx.fillRect(x%200,Math.ceil(x/200),1,1)	
+				ctx.closePath();
+				ctx.fill()
+			 }
+		</script>
+	</body>
+</html>
