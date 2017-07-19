@@ -33,7 +33,7 @@
 			ctx.font = "48px serif";
 			ctx.textAlign="center";
 			ctx.textBaseline="middle";
-			ctx.fillText('Ranchy',110,20);
+			ctx.fillText('冉启阳',110,20);
 			var imgData = ctx.getImageData(0, 0, 200, 200);
 			ctx.clearRect(0,0,200,200);
 			var point = [];
@@ -42,31 +42,41 @@
 			 for(var i=0;i<imgData.height;i++){
 			 	 for(var j=0;j<imgData.width;j++){
 					var x = i*4*imgData.width + 4*j;
-			        r = imgData.data[x],
-			        g = imgData.data[x+1],
-			        b = imgData.data[x+2];
-			        a = imgData.data[x+3]; 
-			        var point2 = [];
-					point2.push(r,g,b,a);			   
-//					console.log(point2)
-					point.push(point2);	
+					if(imgData.data[x+3] != 0){
+//				        r = imgData.data[x],
+//				        g = imgData.data[x+1],
+//				        b = imgData.data[x+2];	
+//				        a = imgData.data[x+3];
+				        mx = j;
+				        my = i;
+				        var point2 = [];
+//						point2.push(r,g,b,a,mx,my);			   
+						point2.push(mx,my);	
+						point.push(point2);					        
+					}
 			 	 }
 			 }
 			 
 			 var m = 0;
 //			 
-			 setInterval(function(){
+			 var timer = setInterval(function(){
 				
 				draw(m);
 			 	m++;
+			 		console.log(m)
+			 	if(m >= point.length-1){
+			 		clearInterval(timer)
+			 	
+			 	}
 			 	
 			 },5)
 
 			 function draw(x){
 		 		ctx.beginPath();
-				var rgba = 'rgba('+point[x][0]+','+point[x][1]+','+point[x][2]+','+point[x][3]+')';
+//				var rgba = 'rgba('+point[x][0]+','+point[x][1]+','+point[x][2]+','+point[x][3]+')';
+				var rgba = 'blue';
 				ctx.fillStyle = rgba;
-				ctx.fillRect(x%200,Math.ceil(x/200),1,1)	
+				ctx.fillRect(point[x][0],point[x][1],1,1)	
 				ctx.closePath();
 				ctx.fill()
 			 }
