@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #000000;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #ffffff;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script src="../mycanvasfn/ranchy_canvasfn.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var myCanvas = document.getElementById('myCanvas');
+			
+			var ctx = myCanvas.getContext('2d');
+
+			var mouse = ranchy.captureMouse(myCanvas);
+			
+            var rect = {
+            		x:myCanvas.width/2,
+           		y:myCanvas.height/2
+            };			
+			
+			draw();
+			
+			function draw(){
+				//清理画布
+				ctx.clearRect(0,0,myCanvas.width,myCanvas.height);
+				
+				//设置填充颜色
+				ctx.fillStyle = '#FFFFFF';
+				//中心点矩形
+				ctx.fillRect(rect.x-2,rect.y-2,4,4);
+				//保存当前
+				ctx.save();
+				//线条颜色
+              	ctx.strokeStyle = '#ffffff';
+              	//开始绘制
+           	    ctx.beginPath();		
+           	    //起点
+				ctx.moveTo(rect.x,rect.y);
+				//终点
+				ctx.lineTo(mouse.x,mouse.y);
+				//连接当前点和开始点
+	            ctx.closePath();
+	            //画线
+	            ctx.stroke();
+	            //调用
+	            ctx.restore();
+	            
+	            window.requestAnimationFrame(draw,myCanvas);
+				
+			}
+			
+		</script>
+	</body>
+</html>
