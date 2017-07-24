@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #000000;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #ffffff;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script src="../mycanvasfn/ranchy_canvasfn.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var myCanvas = document.getElementById('myCanvas');
+			
+			var ctx = myCanvas.getContext('2d');
+
+			var mouse = ranchy.captureMouse(myCanvas);
+			
+            var rect = {
+            		x:myCanvas.width/2,
+           		y:myCanvas.height/2
+            };		
+            
+            var r = 20;
+            var onoff = true;
+            var timer;
+			
+			draw();
+			
+			function draw(){
+				//清理画布
+				ctx.clearRect(0,0,myCanvas.width,myCanvas.height);
+				
+				//设置填充颜色
+				ctx.fillStyle = 'red';
+				//中心点球
+				ctx.arc(192,192,16,0,Math.PI*2,true);
+				ctx.fill();				
+				//保存当前
+				ctx.save();
+				//线条颜色
+              	ctx.strokeStyle = '#ffffff';
+              	//开始绘制
+           	    ctx.beginPath();		
+           	    
+           	    //r的判定
+           	    if(r>20 && onoff){
+           	    		
+           	    		r--;
+           	    		
+           	    }
+           	    
+           	    //起点
+           	    var scIs = ranchy.scIntersection(192,192,mouse.x,mouse.y,r);
+           	   
+				ctx.moveTo(scIs.x,scIs.y);
+				//终点
+				var scIs2 = ranchy.scIntersection(192,192,mouse.x,mouse.y,r+150);
+
+				ctx.lineTo(scIs2.x,scIs2.y);
+				
+				//连接当前点和开始点
+	            ctx.closePath();
+	            //画线
+	            ctx.stroke();
+	            //调用
+	            ctx.restore();
+	            
+	            window.requestAnimationFrame(draw,myCanvas);
+				
+			}
+			
+			myCanvas.onmousedown = function(){
+				
+				onoff = false;
+				
+				timer = setInterval(function(){
+					r++;
+					if(r >= 60){
+						r = 60
+					}
+				},20)
+				
+			}
+			
+			myCanvas.onmouseup = function(){
+				
+				onoff = true;
+				
+				clearInterval(timer)
+				
+			}			
+			
+		</script>
+	</body>
+</html>

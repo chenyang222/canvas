@@ -59,11 +59,13 @@
            	    ctx.beginPath();		
            	    //起点
            	    var scIs = ranchy.scIntersection(192,192,mouse.x,mouse.y,20);
-//				ctx.moveTo(scIs.x,scIs.y);
+           	   
+				ctx.moveTo(scIs.x,scIs.y);
 				//终点
-//				var scIs2 = ranchy.scIntersection(192,-192,mouse.x,-mouse.y,60);
-//				ctx.lineTo(scIs2.x,scIs2.y);
-//				console.log(scIs)
+				var scIs2 = ranchy.scIntersection(192,192,mouse.x,mouse.y,150);
+//				console.log(scIs,scIs2)
+				ctx.lineTo(scIs2.x,scIs2.y);
+				
 				//连接当前点和开始点
 	            ctx.closePath();
 	            //画线
