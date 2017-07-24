@@ -73,35 +73,15 @@ window.ranchy.scIntersection = function(c1,c2,x1,y1,r){
 	var scIs = {x:0,y:0};
 
 	var k,b;
-	
 	k = (y1-c2)/(x1-c1);
 	b = c2-c1*k;
 	
-	var x2,y2,x3,y3;
-	
-	var a,d,c;
-	
-//	a = k*k+1;
-//	d = 2*k*b-2*c1-2*c2*k;
-//	c = c1*c1+c2*c2-r*r+b*b-2*c2*b;
-//	
-//	var qf = ranchy.qf(a,d,c);
-//	console.log(qf)
-	
-//	x2 = qf.x1;
-//	x3 = qf.x2;
-	
+	var x2,x3;
 	var xx = x1-c1;
 	var yy = y1-c2;
 		
 	x2 = c1 + r*Math.sqrt(xx*xx/(xx*xx+yy*yy));
 	x3 = c1 - r*Math.sqrt(xx*xx/(xx*xx+yy*yy));
-	
-//	x2 = r*Math.sqrt(1/(k*k+1));
-//	x3 = -r*Math.sqrt(1/(k*k+1));
-//	
-//	y2 = k*r*Math.sqrt(1/(k*k+1));
-//	y3 = -k*r*Math.sqrt(1/(k*k+1));
 	
 	if(x1>c1){
 		scIs.x = x2;
@@ -110,8 +90,27 @@ window.ranchy.scIntersection = function(c1,c2,x1,y1,r){
 	}else{
 		scIs.x = x2;
 	}
-	
 	scIs.y = k*scIs.x + b;
 	
 	return scIs
 }
+
+//运动函数
+	//力N 当前速度v 摩擦系数μ 起点x,y 
+	// 摩擦力   f = μN
+	//m 桌球重量 170g
+
+	
+window.ranchy.move = function(x,y,v,N,μ){
+	
+	
+	
+	
+}
+// 两点间距离
+window.ranchy.distance = function (x1, y1, x2, y2){
+  let len = arguments.length;
+  let dx = len === 4 ? x2 - x2 : x1;
+  let dy = len === 4 ? y2 - y1 : y1;
+  return Math.sqrt(dx*dx + dy*dy);
+};
