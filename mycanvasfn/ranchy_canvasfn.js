@@ -99,11 +99,11 @@ window.ranchy.scIntersection = function(c1,c2,x1,y1,r){
 	//力N 当前速度v 摩擦系数μ 起点x,y 
 	// 摩擦力   f = μN
 	//m 桌球重量 170g
+	//mode:normal(匀速,默认)、up(匀加速)、down（匀减速）(string)
+	
+window.ranchy.move = function(obj,n,mode,μ,m,x,y){
+	
 
-	
-window.ranchy.move = function(x,y,v,N,μ){
-	
-	
 	
 	
 }

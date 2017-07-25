@@ -37,6 +37,8 @@
 			//摩擦力
 //			var fm = ;
 			
+			var bax = 30;
+			var bay = 190;
 
 			draw();
 			
@@ -50,7 +52,17 @@
            	    ctx.beginPath();		
            	    	
 				//中心点球
-				ctx.arc(30,190,16,0,Math.PI*2,true);
+				ctx.arc(bax,bay,16,0,Math.PI*2,true); 
+				
+				bax++;
+				
+				if(bax >=416 ){
+					bax = 0;
+				}
+				
+				console.log(bax)
+				
+				
 				ctx.fill();	
 				
 				//连接当前点和开始点
