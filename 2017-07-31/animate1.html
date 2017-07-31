@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #000000;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="400"></canvas>
+		
+		<script type="text/javascript">
+			
+			var myCanvas = document.getElementById('myCanvas');
+			
+			var ctx = myCanvas.getContext('2d');
+
+			draw();	
+
+			var i = 0;
+			
+//			var timer = setInterval(function(){
+//				
+//				i+=90;
+//				
+//			},3000)			
+			
+			function draw(){
+				
+				ctx.clearRect(0,0,400,400);
+				
+				ctx.strokeStyle = 'white';
+				
+				ctx.beginPath();
+				
+				ctx.moveTo(50,50);
+				
+				ctx.lineTo(100,50);
+
+				ctx.stroke();			
+				
+				ctx.closePath();
+				
+//				window.requestAnimationFrame(draw,myCanvas);
+				
+			}
+		
+				
+		</script>
+	</body>
+</html>
