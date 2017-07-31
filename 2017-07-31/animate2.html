@@ -32,17 +32,13 @@
 
 			draw();	
 
-			var ad = 1;
+			var i = 0;
 			
-			var timer = setInterval(function(){
-				
-				ad++;
-				
-				if(ad >= 360){
-					ad = 0;
-				}
-				
-			},20)			
+//			var timer = setInterval(function(){
+//				
+//				i+=90;
+//				
+//			},3000)			
 			
 			function draw(){
 				
@@ -52,23 +48,21 @@
 				
 				ctx.beginPath();
 				
-//				var dis = ranchy.distance(ld.x1,ld.y1,ld.x2,ld.y2);
+				var ld = test(10,10,4,45);
 				
-				for(var i=0;i<10;i++){
-					
-					var ld = test(100+i*16,100+i*16,4,ad);
-					
-					ctx.moveTo(ld.x1,ld.y1);
-					
-					ctx.lineTo(ld.x2,ld.y2);						
-					
-				}
+				var dis = ranchy.distance(ld.x1,ld.y1,ld.x2,ld.y2)
+				console.log(dis)
+				
+				ctx.moveTo(ld.x1,ld.y1);
+				
+				ctx.lineTo(ld.x2,ld.y2);
 
 				ctx.stroke();			
 				
 				ctx.closePath();
 				
-				window.requestAnimationFrame(draw,myCanvas);
+//				window.requestAnimationFrame(draw,myCanvas);
+
 				
 			}
 		
@@ -76,33 +70,31 @@
 			function test(x,y,r,radius){
 				
 				var rd = {}
-	
-				if( radius == 90 || radius == 270){
-					
-					rd.x1 = x;
-					rd.y1 = y-4*r;
-					rd.x2 = x;
-					rd.y2 = y+4*r;						
-					
-				}else{
+				
+				var rad = radius*Math.PI/180;
+				
+				var k = Math.tan(rad);
 
-					var rad = radius*Math.PI/180;
-					
-					var k = Math.tan(rad);
-	
-					var b = y-k*x;
-					
-					var x1 = x + r* Math.sqrt(r*r/(k*k+1));
-					var y1 = k*x1 + b; 
-					
-					var x2 = x - r* Math.sqrt(r*r/(k*k+1));
-					var y2 = k*x2 + b;
-					
-					rd.x1 = x1;
-					rd.y1 = y1;
-					rd.x2 = x2;
-					rd.y2 = y2;						
-				}		
+				var b = y-k*x;
+
+				console.log(k,b)
+
+				var a = k*k+1;
+				
+				var b2 = -2*x+2*k*b-2*y*k;
+				
+				var c = x*x + y*y + b*b - 2*y*b - r*r;
+			
+				var x1 = (-b2 + Math.sqrt(b2*b2-4*a*c))/2*a;
+				var y1 = k*x1 + b; 
+				
+				var x2 = (-b2 - Math.sqrt(b2*b2-4*a*c))/2*a;
+				var y2 = k*x2 + b;
+				
+				rd.x1 = x1;
+				rd.y1 = y1;
+				rd.x2 = x2;
+				rd.y2 = y2;			
 				
 				return rd								
 			}

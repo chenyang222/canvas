@@ -109,8 +109,7 @@ window.ranchy.move = function(obj,n,mode,μ,m,x,y){
 }
 // 两点间距离
 window.ranchy.distance = function (x1, y1, x2, y2){
-  let len = arguments.length;
-  let dx = len === 4 ? x2 - x2 : x1;
-  let dy = len === 4 ? y2 - y1 : y1;
+  let dx = x2 - x1;
+  let dy = y2 - y1;
   return Math.sqrt(dx*dx + dy*dy);
 };
