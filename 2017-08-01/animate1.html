@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #000000;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	
+	
+		-->
+		
+		<canvas id="myCanvas" width="400" height="300"></canvas>
+		<script src="../mycanvasfn/ranchy_canvasfn.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var myCanvas = document.getElementById('myCanvas');
+			
+			var ctx = myCanvas.getContext('2d');
+
+			draw();	
+
+			var ad = 135;
+			var ad2 = 135;
+			
+			var timer;
+			var timer2;
+			var timer3;
+			var timer4;
+			
+			function animate1(){
+					
+				ad -= 3;
+				
+				if( ad <= 90){
+					
+					clearInterval(timer);
+					
+					setTimeout(function(){
+					
+						timer2 = setInterval(animate2,20);
+					
+					},500)
+					
+				}
+									
+			}
+			
+			function animate2(){
+					
+				ad -= 3;
+				
+				if( ad <= -45){
+					
+					ad = 135;
+					
+					clearInterval(timer2);
+					
+					setTimeout(function(){					
+					
+						timer = setInterval(animate1,20)
+						
+					},500)				
+				
+				}
+									
+			}			
+
+			function animate3(){
+					
+				ad2 += 3;
+				
+				if( ad2 >= 205){
+					
+					clearInterval(timer3);
+					
+					setTimeout(function(){
+					
+						timer4 = setInterval(animate4,20);
+					
+					},500)
+					
+				}
+									
+			}
+			
+			function animate4(){
+					
+				ad2 += 3;
+				
+				if( ad2 >= 315){
+					
+					ad2 = 135;
+					
+					clearInterval(timer4);
+					
+					setTimeout(function(){					
+					
+						timer3 = setInterval(animate3,20)
+						
+					},500)				
+				
+				}
+									
+			}
+			
+			timer = setInterval(animate1,20);
+			
+			timer3 = setInterval(animate3,20);
+			
+			function draw(){
+				
+				ctx.clearRect(0,0,400,400);
+				
+				ctx.strokeStyle = 'white';
+				
+				ctx.lineWidth = 2;
+				
+				ctx.beginPath();
+				
+//				var dis = ranchy.distance(ld.x1,ld.y1,ld.x2,ld.y2);
+				
+				//left
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(100+i*23,100-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(100+i*23,132-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}	
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(100+i*23,164-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+
+				for(var i=0;i<4;i++){
+					
+					var ld = test(100+i*23,196-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				
+				//right
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(217+i*23,160-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}				
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(217+i*23,192-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(217+i*23,224-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+
+				for(var i=0;i<4;i++){
+					
+					var ld = test(217+i*23,256-i*23,4,ad);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				
+				//top
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(116+i*23,92-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}				
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(145+i*23,107-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(174+i*23,122-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(203+i*23,137-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				//bottom
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(114+i*23,219-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}				
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(143+i*23,234-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(172+i*23,249-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}
+				
+				for(var i=0;i<4;i++){
+					
+					var ld = test(201+i*23,264-i*23,4,ad2);
+					
+					ctx.moveTo(ld.x1,ld.y1);
+					
+					ctx.lineTo(ld.x2,ld.y2);						
+					
+				}		
+
+				ctx.stroke();			
+				
+				ctx.closePath();
+				
+				window.requestAnimationFrame(draw,myCanvas);
+				
+			}
+		
+			
+			function test(x,y,r,radius){
+				
+				var rd = {}
+	
+				if( radius == 90 || radius == 270){
+					
+					rd.x1 = x;
+					rd.y1 = y-4*r;
+					rd.x2 = x;
+					rd.y2 = y+4*r;						
+					
+				}else{
+
+					var rad = radius*Math.PI/180;
+					
+					var k = Math.tan(rad);
+	
+					var b = y-k*x;
+					
+					var x1 = x + r* Math.sqrt(r*r/(k*k+1));
+					var y1 = k*x1 + b; 
+					
+					var x2 = x - r* Math.sqrt(r*r/(k*k+1));
+					var y2 = k*x2 + b;
+					
+					rd.x1 = x1;
+					rd.y1 = y1;
+					rd.x2 = x2;
+					rd.y2 = y2;						
+				}		
+				
+				return rd								
+			}
+			
+			
+		</script>
+	</body>
+</html>
