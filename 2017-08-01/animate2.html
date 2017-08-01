@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			#myCanvas{
+				border: 1px solid #000;
+				background: #FFFFFF;
+			}
+			html,body{
+				padding: 0;
+				margin: 0;
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+	 			#202020
+	
+		-->
+		
+		<canvas id="myCanvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			
+			var myCanvas = document.getElementById('myCanvas');
+			
+			var ctx = myCanvas.getContext('2d');
+			
+			var width = 1;
+			var height = 5;
+			var snakeArray = [];
+			draw();	
+			
+			function draw(){
+				
+				ctx.clearRect(0,0,500,500);
+				
+				ctx.beginPath();
+				
+				snakeCarray(30,30,1,5);
+					
+				ctx.closePath();
+				
+				window.requestAnimationFrame(draw,myCanvas);
+				
+			}
+			
+			function snakeCarray(x,y,width,height){
+				snakeArray = [];
+		        //画出15个方块，设置成#202020
+		        for (var i = 0; i < 24; i++) {
+		            var rect = new Rect(x-i,y,width,height,"#202020");
+					rectDraw(rect);
+		        }	
+		        
+			}
+			
+			function snakeMove(){
+				
+			}
+			
+		    //构造对象方块
+		    function Rect(x,y,w,h,color){
+		        this.x = x;
+		        this.y = y;
+		        this.w = w;
+		        this.h = h;
+		        this.color = color;
+		    }
+		    
+		    function rectDraw(e){
+		        ctx.beginPath();
+		        ctx.fillStyle = e.color;
+		        ctx.rect(e.x,e.y,e.w,e.h);
+		        ctx.fill();
+		        ctx.stroke();		    	
+		    }
+		</script>
+	</body>
+</html>
