@@ -95,6 +95,41 @@ window.ranchy.scIntersection = function(c1,c2,x1,y1,r){
 	return scIs
 }
 
+//求直线与圆的交点（参数圆心x,y，半径r，直线在坐标系中的角度radius）
+window.ranchy.scInterRadius = function(x,y,r,radius){
+	
+	var rd = {}
+
+	if( radius == 90 || radius == 270){
+		
+		rd.x1 = x;
+		rd.y1 = y-r;
+		rd.x2 = x;
+		rd.y2 = y+r;						
+		
+	}else{
+
+		var rad = radius*Math.PI/180;
+		
+		var k = Math.tan(rad);
+
+		var b = y-k*x;
+		
+		var x1 = x + r* Math.sqrt(r*r/(k*k+1));
+		var y1 = k*x1 + b; 
+		
+		var x2 = x - r* Math.sqrt(r*r/(k*k+1));
+		var y2 = k*x2 + b;
+		
+		rd.x1 = x1;
+		rd.y1 = y1;
+		rd.x2 = x2;
+		rd.y2 = y2;						
+	}		
+	
+	return rd								
+}
+
 //运动函数
 	//力N 当前速度v 摩擦系数μ 起点x,y 
 	// 摩擦力   f = μN
