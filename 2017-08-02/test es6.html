@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <style>
+    canvas {
+      border: 2px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+  
+    let W = canvas.width = 600;
+    let H = canvas.height = 600;
+    
+    class MoveRect {
+      constructor(props){
+        this.x = 0;
+        this.y = 0;
+        this.width = 50;
+        this.speed = 1;
+        this.rad = 0;
+        this.v = 0;
+        this.lineWidth = 6;
+        Object.assign(this, props);
+        return this;
+      }
+      init(ctx){
+        this.render(ctx);
+        this.v += this.speed;
+        if(this.v >= this.width){
+          this.rad += Math.PI/2;
+          this.rad %= Math.PI*2;
+          this.v = 0;
+        }
+        return this;
+      }
+      render(ctx){
+        const {x, y, width, rad, v,lineWidth} = this;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rad);
+        ctx.lineWidth = lineWidth;
+        ctx.beginPath();
+        ctx.lineTo(-width/2, width/2-v);
+        ctx.lineTo(-width/2, -width/2);
+        ctx.lineTo(-width/2 + v, -width/2);
+        ctx.stroke();
+        ctx.restore();
+        return this;
+      }
+    }
+    
+    const rect = new MoveRect({
+      x: W/2,
+      y: H/2,
+      width: 200,
+      speed: 2,
+      rad: 45 * Math.PI / 180
+    });
+    
+    (function fn(){
+      window.requestAnimationFrame(fn);
+      ctx.clearRect(0, 0, W, H);
+      rect.init(ctx);
+    })();
+  </script>
+</body>
+</html>

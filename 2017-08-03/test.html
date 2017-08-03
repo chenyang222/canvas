@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 2px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<canvas id="ctx"></canvas>
+	
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById('ctx');
+			
+			var ctx = canvas.getContext('2d');
+			
+			var W = canvas.width = 600;
+			
+			var H = canvas.height = 600;
+			
+			var MoveRect = function(x,y,width,speed,rad,linewidth,v){
+				
+				this.x = x;
+				
+				this.y = y;
+				
+				this.width = width;
+				
+				this.speed = speed;
+				
+				this.rad = rad;
+				
+				this.linewidth = linewidth;
+				
+				this.v = v;
+				
+			}
+			
+			MoveRect.prototype.render = function(){
+				
+				ctx.save();
+				
+				ctx.translate(this.x,this.y);
+				
+				ctx.rotate(this.rad);
+				
+				ctx.lineWidth = this.linewidth;
+				
+				ctx.beginPath();
+				
+				ctx.lineTo(-this.width/2 , this.width/2 - this.v);
+				
+				ctx.lineTo(-this.width/2 , - this.width/2);
+				
+				ctx.lineTo(-this.width/2 + this.v , - this.width/2);
+				
+				ctx.stroke();
+				
+				ctx.restore();
+			
+			}
+			
+			
+			MoveRect.prototype.init = function(){
+				
+				this.render();
+				
+				this.v += this.speed;
+				
+				if(this.v >= this.width){
+					
+					this.rad += Math.PI/2;
+					
+					this.rad %= Math.PI*2;
+					
+					this.v = 0;
+				}
+				
+			}
+			
+			var rectArray = [];
+			
+			for(var i = 0; i < 19; i++ ){
+				
+				for(var j = 0; j<19; j++){
+					
+					if( j%2 == 1){
+						
+						var rect = new MoveRect(-15+i*35,5+j*35,20,1,45*Math.PI/180,5,i*0.5);
+						
+					}else if( j%2 == 0){
+
+						var rect = new MoveRect(5+i*35,5+j*35,20,1,45*Math.PI/180,5,i*0.5);
+
+					}						
+					
+					rectArray.push(rect);
+
+				}
+				
+			}
+			
+//			var rect = new MoveRect(10,5,20,1,45*Math.PI/180,5);
+			
+			(function fn(){
+				
+				window.requestAnimationFrame(fn);
+				
+				ctx.clearRect( 0, 0, W, H );
+				
+//				rect.init();
+				
+				for( var i = 0; i < rectArray.length-1; i++ ){
+						
+					rectArray[i].init();
+						
+				}
+				
+				
+			})();
+		</script>
+	</body>
+</html>
