@@ -83,29 +83,7 @@
 				
 			}
 			
-			var rectArray = [];
-			
-			for(var i = 0; i < 19; i++ ){
-				
-				for(var j = 0; j<19; j++){
-					
-					if( j%2 == 1){
-						
-						var rect = new MoveRect(-15+i*35,5+j*35,20,1,45*Math.PI/180,5,i*0.5);
-						
-					}else if( j%2 == 0){
-
-						var rect = new MoveRect(5+i*35,5+j*35,20,1,45*Math.PI/180,5,i*0.5);
-
-					}						
-					
-					rectArray.push(rect);
-
-				}
-				
-			}
-			
-//			var rect = new MoveRect(10,5,20,1,45*Math.PI/180,5);
+			var rect = new MoveRect(W/2,H/2,200,2,45*Math.PI/180,5,0);
 			
 			(function fn(){
 				
@@ -113,14 +91,7 @@
 				
 				ctx.clearRect( 0, 0, W, H );
 				
-//				rect.init();
-				
-				for( var i = 0; i < rectArray.length-1; i++ ){
-						
-					rectArray[i].init();
-						
-				}
-				
+				rect.init();
 				
 			})();
 		</script>
