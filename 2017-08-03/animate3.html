@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 2px solid #000;
+				background: #000;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<canvas id="ctx"></canvas>
+	
+		<script type="text/javascript">
+			
+			var canvas = document.getElementById('ctx');
+			
+			var ctx = canvas.getContext('2d');
+			
+			var W = canvas.width = 600;
+			
+			var H = canvas.height = 600;
+			
+			var Circle = function(x,y,r){
+				
+				this.x = x;
+				
+				this.y = y;
+				
+				this.r = r;
+				
+				this.color = '#FFFFFF';
+				
+			  	var dx = this.x - W/2;
+			 
+			  	var dy = this.y - H/2;
+			  
+			  	var k = Math.floor(10-Math.sqrt(dx*dx + dy*dy)/50);				
+			  	
+			  	console.log(k)
+				
+				var sway = k*3;
+				
+				this.sway = sway;
+				
+				var speed = k/10;
+				
+				this.speed = speed;
+				
+				this.vt = 0;
+								
+			}
+			
+			Circle.prototype.render = function(){
+				
+				ctx.fillStyle = this.color;	
+
+				ctx.beginPath();
+				
+				ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, true);
+				
+				ctx.fill();
+				
+				ctx.closePath();
+				
+			}
+			
+			Circle.prototype.init = function(){
+				
+				this.render();
+				
+				this.y += this.speed;
+				
+				this.vt += this.speed;
+				
+				if(Math.abs(this.vt) >= this.sway){
+					
+					this.speed =  -this.speed;
+										
+				}
+				if(this.speed < 0){
+					
+					this.color = '#BAB5B5';
+					
+				}else{
+					
+					this.color = '#FFFFFF';
+					
+				}
+				
+			}
+
+			var circleArray = [];
+			
+			for(var i = 0; i < 32; i++ ){
+				
+				for(var j = 0; j<32; j++){
+					
+					if( j%2 == 1){
+						
+						var circle = new Circle(-5+i*20,5+j*20,2);
+						
+					}else if( j%2 == 0){
+
+						var circle = new Circle(5+i*20,5+j*20,2);
+
+					}						
+					
+					circleArray.push(circle);
+
+				}
+				
+			}
+
+//			var circle = new Circle(100,100,50);
+			
+			
+			(function fn(){
+				
+				window.requestAnimationFrame(fn);
+				
+				ctx.clearRect(0, 0, W, H);
+				
+//				circle.init();
+
+				for( var i = 0; i < circleArray.length-1; i++ ){
+						
+					circleArray[i].init();
+						
+				}
+								
+			})()
+
+		</script>
+	</body>
+</html>
